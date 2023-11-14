@@ -13,7 +13,7 @@ const PopularMenu = () => {
       });
   }, []);
   return (
-    <section className="mb-4">
+    <section className="mb-4 p-2">
       <SectionTitle
         subHeading="Check it out"
         heading="From Our Menu"

@@ -37,9 +37,28 @@ const Order = () => {
               ))}
             </div>
           </TabPanel>
-          <TabPanel></TabPanel>
-          <TabPanel>soups</TabPanel>
-          <TabPanel>desserts</TabPanel>
+          <TabPanel>
+            <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-8 my-5">
+              {pizza.map((item) => (
+                <FoodCard item={item} key={item._id}></FoodCard>
+              ))}
+            </div>
+          </TabPanel>
+          <TabPanel>
+            <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-8 my-5">
+              {soup.map((item) => (
+                <FoodCard item={item} key={item._id}></FoodCard>
+              ))}
+            </div>
+          </TabPanel>
+          <TabPanel>
+            {" "}
+            <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-8 my-5">
+              {soup.map((item) => (
+                <FoodCard item={item} key={item._id}></FoodCard>
+              ))}
+            </div>
+          </TabPanel>
           <TabPanel>drinks</TabPanel>
         </Tabs>
       </div>

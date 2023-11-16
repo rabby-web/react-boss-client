@@ -54,7 +54,7 @@ const Order = () => {
           <TabPanel>
             {" "}
             <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-8 my-5">
-              {soup.map((item) => (
+              {desserts.map((item) => (
                 <FoodCard item={item} key={item._id}></FoodCard>
               ))}
             </div>

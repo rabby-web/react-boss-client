@@ -6,6 +6,9 @@ const FoodCard = ({ item }) => {
       <div className="card w-full bg-base-100 shadow-xl">
         <figure>
           <img src={image} alt="Shoes" />
+          <p className="absolute right-0 top-2 mr-2 mt-2 px-2 py-1 rounded bg-slate-800 text-white">
+            ${price}
+          </p>
         </figure>
         <div className="card-body">
           <h2 className="card-title">{name}</h2>

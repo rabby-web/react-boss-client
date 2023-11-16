@@ -10,7 +10,7 @@ const MenuItem = ({ item }) => {
       />
       <div>
         <div className="flex justify-between">
-          <h2 className="uppercase">{name}-------------------</h2>
+          <h2 className="uppercase">{name}----------------</h2>
           <p className="text-yellow-400">${price}</p>
         </div>
         <p>{recipe}</p>

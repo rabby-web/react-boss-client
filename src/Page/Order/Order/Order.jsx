@@ -13,7 +13,7 @@ const Order = () => {
   const pizza = menu.filter((item) => item.category === "pizza");
   const soup = menu.filter((item) => item.category === "soup");
   const salad = menu.filter((item) => item.category === "salad");
-  const offered = menu.filter((item) => item.category === "offered");
+  const drinks = menu.filter((item) => item.category === "drinks");
   return (
     <div>
       <Cover img={orderCover} title={"OUR SHOP"}></Cover>
@@ -59,7 +59,13 @@ const Order = () => {
               ))}
             </div>
           </TabPanel>
-          <TabPanel>drinks</TabPanel>
+          <TabPanel>
+            <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-8 my-5">
+              {drinks.map((item) => (
+                <FoodCard item={item} key={item._id}></FoodCard>
+              ))}
+            </div>
+          </TabPanel>
         </Tabs>
       </div>
     </div>

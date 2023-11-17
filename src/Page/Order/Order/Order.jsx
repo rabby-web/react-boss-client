@@ -5,11 +5,18 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import useMenu from "../../../hooks/useMenu";
 import FoodCard from "../../../components/FoodCard/FoodCard";
+import { useParams } from "react-router-dom";
 
 const Order = () => {
-  const [tabIndex, setTabIndex] = useState(0);
+  const categories = ["salad", "pizza", "soup", "dessert", "drinks"];
+  const { category } = useParams();
+  const initialIndex = categories.indexOf(category);
+
+  console.log(category);
+  const [tabIndex, setTabIndex] = useState(initialIndex);
   const [menu] = useMenu();
-  const desserts = menu.filter((item) => item.category === "dessert");
+
+  const dessert = menu.filter((item) => item.category === "dessert");
   const pizza = menu.filter((item) => item.category === "pizza");
   const soup = menu.filter((item) => item.category === "soup");
   const salad = menu.filter((item) => item.category === "salad");
@@ -24,7 +31,7 @@ const Order = () => {
             <Tab className="border-0 text-yellow-500 cursor-pointer">PIZZA</Tab>
             <Tab className="border-0 text-yellow-500 cursor-pointer">SOUPS</Tab>
             <Tab className="border-0 text-yellow-500 cursor-pointer">
-              DESSERTS
+              DESSERT
             </Tab>
             <Tab className="border-0 text-yellow-500 cursor-pointer">
               DRINKS
@@ -54,7 +61,7 @@ const Order = () => {
           <TabPanel>
             {" "}
             <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-8 my-5">
-              {desserts.map((item) => (
+              {dessert.map((item) => (
                 <FoodCard item={item} key={item._id}></FoodCard>
               ))}
             </div>

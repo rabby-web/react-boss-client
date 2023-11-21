@@ -73,9 +73,7 @@ const NavBar = () => {
         <ul className="menu menu-horizontal px-1">{navOptions}</ul>
       </div>
       <div className="navbar-end">
-        <div className="w-12">
-          <img src={user.photoURL} />
-        </div>
+        <a className="btn">Button</a>
       </div>
     </div>
   );

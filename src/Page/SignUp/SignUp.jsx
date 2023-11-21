@@ -1,44 +1,27 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import {
-  loadCaptchaEnginge,
-  LoadCanvasTemplate,
-  validateCaptcha,
-} from "react-simple-captcha";
+import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Link } from "react-router-dom";
 
-const Login = () => {
-  const captchaRef = useRef(null);
-  const [disabled, setDisabled] = useState(true);
-  const { signIn } = useContext(AuthContext);
-  useEffect(() => {
-    loadCaptchaEnginge(6);
-  }, []);
+const SignUp = () => {
+  const { createUser } = useContext(AuthContext);
   const handleLogin = (event) => {
     event.preventDefault();
     const from = event.target;
+    const name = from.name.value;
     const email = from.email.value;
     const password = from.password.value;
-    console.log(email, password);
-    signIn(email, password).then((res) => {
+    console.log(name, email, password);
+    createUser(email, password).then((res) => {
       const user = res.user;
       console.log(user);
     });
-  };
-  const handleValidateCaptcha = () => {
-    const user_captcha_value = captchaRef.current.value;
-    if (validateCaptcha(user_captcha_value)) {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-    }
   };
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col md:flex-row ">
           <div className="text-center md:w-1/2 lg:text-left">
-            <h1 className="text-5xl font-bold">Login now!</h1>
+            <h1 className="text-5xl font-bold">SignUp now!</h1>
             <p className="py-6">
               Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
               excepturi exercitationem quasi. In deleniti eaque aut repudiandae
@@ -47,6 +30,18 @@ const Login = () => {
           </div>
           <div className="card shrink-0 md:w-1/2 w-full max-w-sm shadow-2xl bg-base-100">
             <form onSubmit={handleLogin} className="card-body">
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Name</span>
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="name"
+                  className="input input-bordered"
+                  required
+                />
+              </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
@@ -77,42 +72,19 @@ const Login = () => {
                   </a>
                 </label> */}
               </div>
-              <div className="form-control">
-                <label className="label">
-                  <LoadCanvasTemplate />
-                </label>
-                <input
-                  type="text"
-                  name="captcha"
-                  ref={captchaRef}
-                  placeholder="type the captcha"
-                  className="input input-bordered"
-                  required
-                />
-                <label className="label">
-                  <a href="#" className="label-text-alt link link-hover"></a>
-                </label>
-                <button
-                  onClick={handleValidateCaptcha}
-                  className="btn btn-outline btn-xs"
-                >
-                  Tiny
-                </button>
-              </div>
               <div className="form-control mt-6">
                 <input
                   className="btn btn-primary"
                   type="submit"
-                  disabled={disabled}
                   value="Login"
                 />
               </div>
             </form>
             <p className="text-center pb-4 text-lg font-medium">
               <small>
-                New Here?{" "}
-                <Link className="font-semibold text-purple-600" to="/signUp">
-                  Create an account
+                have an account?{" "}
+                <Link className="font-semibold text-purple-600" to="/login">
+                  Please Login
                 </Link>
               </small>
             </p>
@@ -123,4 +95,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;

@@ -15,7 +15,6 @@ const Login = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
     loadCaptchaEnginge(6);
@@ -27,6 +26,7 @@ const Login = () => {
     const email = from.email.value;
     const password = from.password.value;
     console.log(email, password);
+    const from2 = location.state?.from?.pathname || "/";
     signIn(email, password)
       .then((res) => {
         const user = res.user;
@@ -39,7 +39,7 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate(from, { replace: true });
+        navigate(from2, { replace: true });
       })
       .catch((err) => console.error(err));
   };

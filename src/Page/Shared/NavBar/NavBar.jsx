@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
+import { FaCartPlus } from "react-icons/fa";
 
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -11,37 +12,47 @@ const NavBar = () => {
   };
   const navOptions = (
     <>
-      <li className="text-lg font-semibold">
-        <Link to="/">Home</Link>
-      </li>
-      <li className="text-lg font-semibold">
-        <Link to="/menu">Our Menu</Link>
-      </li>
-      <li className="text-lg font-semibold">
-        <Link to="/order/salad">Order</Link>
-      </li>
-      <li className="text-lg font-semibold">
-        <Link to="/secret">Secret</Link>
-      </li>
+      <div className="flex justify-center items-center">
+        <li className="text-lg font-semibold">
+          <Link to="/">Home</Link>
+        </li>
+        <li className="text-lg font-semibold">
+          <Link to="/menu">Our Menu</Link>
+        </li>
+        <li className="text-lg font-semibold">
+          <Link to="/order/salad">Order</Link>
+        </li>
+        <li className="text-lg font-semibold">
+          <Link to="/secret">Secret</Link>
+        </li>
+        <li className="text-lg font-semibold">
+          <Link to="/secret">
+            <button className="btn ">
+              <FaCartPlus className="text-xl" />
+              <div className="badge badge-secondary mb-3">+0</div>
+            </button>
+          </Link>
+        </li>
 
-      {user ? (
-        <>
-          <button onClick={handleLogOut} className="btn btn-active btn-ghost">
-            Logout
-          </button>
-        </>
-      ) : (
-        <>
-          {" "}
-          <li className="text-lg font-semibold">
-            <Link to="/login">Login</Link>
-          </li>
-        </>
-      )}
+        {user ? (
+          <>
+            <button onClick={handleLogOut} className="btn btn-active btn-ghost">
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            {" "}
+            <li className="text-lg font-semibold">
+              <Link to="/login">Login</Link>
+            </li>
+          </>
+        )}
+      </div>
     </>
   );
   return (
-    <div className="navbar max-w-screen-2xl mx-auto fixed z-10 bg-opacity-25 bg-white text-black">
+    <div className="navbar max-w-screen-2xl mx-auto fixed z-10 bg-opacity-50 bg-white text-black">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">

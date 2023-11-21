@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const SignUp = () => {
   const {
@@ -8,24 +10,18 @@ const SignUp = () => {
     watch,
     formState: { errors },
   } = useForm();
+
+  const { createUser } = useContext(AuthContext);
+
   const onSubmit = (data) => {
     console.log(data);
+    createUser(data.email, data.password).then((result) => {
+      const loggedUser = result.user;
+      console.log(loggedUser);
+    });
   };
   console.log(watch("example"));
 
-  //   const { createUser } = useContext(AuthContext);
-  //   const handleLogin = (event) => {
-  //     event.preventDefault();
-  //     const from = event.target;
-  //     const name = from.name.value;
-  //     const email = from.email.value;
-  //     const password = from.password.value;
-  //     console.log(name, email, password);
-  //     createUser(email, password).then((res) => {
-  //       const user = res.user;
-  //       console.log(user);
-  //     });
-  //   };
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">

@@ -80,6 +80,7 @@ const SignUp = () => {
                     required: true,
                     minLength: 6,
                     maxLength: 20,
+                    pattern: /[A-Za-z]/,
                   })}
                   name="password"
                   placeholder="password"
@@ -87,7 +88,18 @@ const SignUp = () => {
                   required
                 />
                 {errors.password?.type === "required" && (
-                  <p className="text-red-400">First name is required</p>
+                  <p className="text-red-400">Password must be 6 Character</p>
+                )}
+                {errors.password?.type === "minLength" && (
+                  <p className="text-red-400">Password must be 6 Character</p>
+                )}
+                {errors.password?.type === "maxLength" && (
+                  <p className="text-red-400">
+                    Password must be less 20 Character
+                  </p>
+                )}
+                {errors.password?.type === "pattern" && (
+                  <p className="text-red-400">Password must be Uppercase</p>
                 )}
 
                 {/* <label className="label">
@@ -100,7 +112,7 @@ const SignUp = () => {
                 <input
                   className="btn btn-primary"
                   type="submit"
-                  value="Login"
+                  value="Register"
                 />
               </div>
             </form>

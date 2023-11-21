@@ -1,21 +1,31 @@
-import { useContext } from "react";
-import { AuthContext } from "../../providers/AuthProvider";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 const SignUp = () => {
-  const { createUser } = useContext(AuthContext);
-  const handleLogin = (event) => {
-    event.preventDefault();
-    const from = event.target;
-    const name = from.name.value;
-    const email = from.email.value;
-    const password = from.password.value;
-    console.log(name, email, password);
-    createUser(email, password).then((res) => {
-      const user = res.user;
-      console.log(user);
-    });
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
   };
+  console.log(watch("example"));
+
+  //   const { createUser } = useContext(AuthContext);
+  //   const handleLogin = (event) => {
+  //     event.preventDefault();
+  //     const from = event.target;
+  //     const name = from.name.value;
+  //     const email = from.email.value;
+  //     const password = from.password.value;
+  //     console.log(name, email, password);
+  //     createUser(email, password).then((res) => {
+  //       const user = res.user;
+  //       console.log(user);
+  //     });
+  //   };
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">
@@ -29,18 +39,21 @@ const SignUp = () => {
             </p>
           </div>
           <div className="card shrink-0 md:w-1/2 w-full max-w-sm shadow-2xl bg-base-100">
-            <form onSubmit={handleLogin} className="card-body">
+            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>
                 </label>
                 <input
                   type="text"
+                  {...register("name", { required: true })}
                   name="name"
                   placeholder="name"
                   className="input input-bordered"
-                  required
                 />
+                {errors.name && (
+                  <span className="text-red-500">Name is required</span>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -48,11 +61,14 @@ const SignUp = () => {
                 </label>
                 <input
                   type="email"
+                  {...register("email", { required: true })}
                   name="email"
                   placeholder="email"
                   className="input input-bordered"
-                  required
                 />
+                {errors.email && (
+                  <span className="text-red-500">Email is required</span>
+                )}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -60,11 +76,19 @@ const SignUp = () => {
                 </label>
                 <input
                   type="password"
+                  {...register("password", {
+                    required: true,
+                    minLength: 6,
+                    maxLength: 20,
+                  })}
                   name="password"
                   placeholder="password"
                   className="input input-bordered"
                   required
                 />
+                {errors.password?.type === "required" && (
+                  <p className="text-red-400">First name is required</p>
+                )}
 
                 {/* <label className="label">
                   <a href="#" className="label-text-alt link link-hover">

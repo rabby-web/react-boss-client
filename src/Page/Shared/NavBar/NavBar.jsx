@@ -29,7 +29,7 @@ const NavBar = () => {
           <Link to="/secret">Secret</Link>
         </li>
         <li className="text-lg font-semibold">
-          <Link to="/secret">
+          <Link to="/dashboard/cart">
             <button className="btn ">
               <FaCartPlus className="text-xl" />
               <div className="badge badge-secondary mb-3">+{cart.length}</div>

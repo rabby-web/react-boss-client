@@ -13,13 +13,13 @@ const FoodCard = ({ item }) => {
   const handleAddToCart = (food) => {
     if (user && user.email) {
       // todo
-      const cartItem = { name, image, price, recipe };
+      const cartItem = { name, image, price, recipe, email: user.email };
       axiosSecure.post("/carts", cartItem).then((res) => {
         console.log(res.data);
         if (res.data.insertedId) {
           Swal.fire({
             title: "Good job!",
-            text: "Successfully add ${}",
+            text: "Successfully add",
             icon: "success",
           });
         }

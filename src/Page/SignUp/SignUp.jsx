@@ -3,8 +3,10 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const SignUp = () => {
+  const axiosPublic = useAxiosPublic();
   const {
     register,
     handleSubmit,
@@ -21,13 +23,22 @@ const SignUp = () => {
       console.log(loggedUser);
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
-          console.log("User Profle");
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Successfully Login",
-            showConfirmButton: false,
-            timer: 1500,
+          // create user entry in the database
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+          };
+          axiosPublic.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              console.log("user added the database");
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Successfully Login",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
           });
         })
         .catch((error) => console.log(error));

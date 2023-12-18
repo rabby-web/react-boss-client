@@ -10,10 +10,12 @@ import {
   FaUsers,
   FaUtensils,
 } from "react-icons/fa";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
   // TODO get admin value from the database
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
+  console.log(isAdmin);
   return (
     <div className="flex">
       {/* dashboard side bar */}

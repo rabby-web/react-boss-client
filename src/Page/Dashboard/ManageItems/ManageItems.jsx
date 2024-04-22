@@ -1,8 +1,17 @@
+import { FaEdit, FaTrash } from "react-icons/fa";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import useMenu from "../../../hooks/useMenu";
 
 const ManageItems = () => {
   const [menu] = useMenu();
+
+  const handleUpdate = (item) => {
+    console.log(item);
+  };
+
+  const handleDelete = (item) => {
+    console.log(item);
+  };
   return (
     <div>
       <SectionTitle
@@ -41,9 +50,22 @@ const ManageItems = () => {
                     </div>
                   </td>
                   <td>{item.name}</td>
-                  <td>{item.price}</td>
+                  <td>$ {item.price}</td>
                   <th>
-                    <button className="btn btn-ghost btn-xs">details</button>
+                    <button
+                      onClick={() => handleUpdate(item)}
+                      className="btn btn-ghost text-purple-600 font-semibold text-lg"
+                    >
+                      <FaEdit />
+                    </button>
+                  </th>
+                  <th>
+                    <button
+                      onClick={() => handleDelete(item)}
+                      className="btn btn-ghost text-red-600 font-semibold text-lg"
+                    >
+                      <FaTrash />
+                    </button>
                   </th>
                 </tr>
               ))}

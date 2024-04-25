@@ -4,7 +4,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 
 // TODO: add publishable ke
-const stripePromise = loadStripe("");
+const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 const Payment = () => {
   return (
     <div>
@@ -14,7 +14,7 @@ const Payment = () => {
       ></SectionTitle>
       <div>
         <Elements stripe={stripePromise}>
-          <CheckoutForm></CheckoutForm>
+          <CheckoutForm />
         </Elements>
       </div>
     </div>
